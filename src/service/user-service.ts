@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import { db } from "../db";
-import { users } from "../db/schema";
+import { users, session } from "../db/schema";
 import { eq } from "drizzle-orm";
 
 export const userService = {
@@ -26,5 +26,36 @@ export const userService = {
       email,
       password: hashedPassword,
     });
+  },
+
+  async getCurrentUser(token: string) {
+    const sessionRecord = await db
+      .select()
+      .from(session)
+      .where(eq(session.token, token))
+      .limit(1);
+
+    const [currentSession] = sessionRecord;
+
+    if (!currentSession) {
+      throw new Error("unauthorized");
+    }
+
+    const user = await db
+      .select({
+        id: users.id,
+        name: users.name,
+        email: users.email,
+        createdAt: users.createdAt,
+      })
+      .from(users)
+      .where(eq(users.id, currentSession.userId))
+      .limit(1);
+
+    if (user.length === 0) {
+      throw new Error("unauthorized");
+    }
+
+    return user[0];
   },
 };
