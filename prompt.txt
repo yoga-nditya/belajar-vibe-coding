@@ -1,7 +1,42 @@
-Buatkan issue.md, berisi planing untuk membuat ini : 
+buatkan issue.md yang berisi perencanaan untuk nanti di implementasikan untuk junior programmer atau model ai yang  lebih murah
 
-Buat Project Baru di folder ini menggunakan bun dan gunakan depedency : - elysia.js, - Drizzle, -Mysql  
+isi dari planing nya adalah sebagai berikut : 
 
-jangan terlalu low level atau detail cukup intruksikan secara high level 
+buat table users: 
+id integer auto increment
+name varchar 255 not null
+email varchar 255 not null 
+password varchar 255 not null 
+password merupakan hash dari bycrypt 
+created_at timestamp default current_timestamp
 
-nanti dokumen planing nya akan digunakan oleh programmer atau model yang lebih murah untuk di implementasinya 
+buatkan api untuk registrasi user baru 
+
+endpoint : POST /api/users
+
+request body : 
+{
+    name : ""
+    email : ""
+    password : ""
+}
+
+response body (succsess) :
+{
+    data : "ok"
+}
+
+response body (error) :
+{
+    error : "email aau password salah"
+}
+
+struktur folder di dalam src : 
+- routes : berisi routing
+- service : berisi logic aplikasi
+
+struktur file : 
+- routes : menggunakan format misal user-route.ts
+- service : menggunakan format misal user-service.ts
+
+jelaskan tahapan2 yang harus dilakukan untuk implementasi fitur ini anggap nanti yang mengimplementasikan adalah junior programmer atau mode ai yang lebih murah 
