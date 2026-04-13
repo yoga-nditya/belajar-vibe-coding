@@ -2,28 +2,25 @@ buatkan issue.md yang berisi perencanaan untuk nanti di implementasikan untuk ju
 
 isi dari planing nya adalah sebagai berikut : 
 
-buat table users: 
+buat table session: 
 id integer auto increment
-name varchar 255 not null
-email varchar 255 not null 
-password varchar 255 not null 
-password merupakan hash dari bycrypt 
+token varchar 255 not null(isinya UUID untuk token user yang login)
+user_id integer (pk ke table users)
 created_at timestamp default current_timestamp
 
-buatkan api untuk registrasi user baru 
+buatkan api untuk login user 
 
-endpoint : POST /api/users
+endpoint : POST /api/login
 
 request body : 
 {
-    name : ""
     email : ""
     password : ""
 }
 
 response body (succsess) :
 {
-    data : "ok"
+    data : "token yang dihasilkan"
 }
 
 response body (error) :

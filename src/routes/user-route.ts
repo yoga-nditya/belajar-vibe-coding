@@ -15,7 +15,7 @@ export const userRoute = new Elysia({ prefix: "/api" }).post(
       return { data: "ok" };
     } catch (error: any) {
       set.status = 400;
-      return { error: error.message ?? "email atau password salah" };
+      return { error: error.message ?? "email sudah terdaftar" };
     }
   }
 );
